@@ -1,0 +1,5 @@
+*.o
+.cache
+valgrind-out.txt
+tests
+dist/

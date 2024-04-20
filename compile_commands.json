@@ -1,0 +1,53 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/x86_64-linux-gnu-g++-10",
+      "-c",
+      "-g",
+      "-Wall",
+      "-std=c++17",
+      "-I",
+      ".",
+      "-o",
+      "decoder/Decoder.o",
+      "decoder/Decoder.cpp"
+    ],
+    "directory": "/home/groot/bit-torrent",
+    "file": "/home/groot/bit-torrent/decoder/Decoder.cpp",
+    "output": "/home/groot/bit-torrent/decoder/Decoder.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/x86_64-linux-gnu-g++-10",
+      "-c",
+      "-g",
+      "-Wall",
+      "-std=c++17",
+      "-I",
+      ".",
+      "-o",
+      "decoder/Decoder.o",
+      "decoder/BEncodeToken.cpp"
+    ],
+    "directory": "/home/groot/bit-torrent",
+    "file": "/home/groot/bit-torrent/decoder/BEncodeToken.cpp",
+    "output": "/home/groot/bit-torrent/decoder/BEncodeToken.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/x86_64-linux-gnu-g++-10",
+      "-c",
+      "-g",
+      "-Wall",
+      "-std=c++17",
+      "-I",
+      ".",
+      "-o",
+      "decoder/Decoder.o",
+      "utils/utils.cpp"
+    ],
+    "directory": "/home/groot/bit-torrent",
+    "file": "/home/groot/bit-torrent/utils/utils.cpp",
+    "output": "/home/groot/bit-torrent/utils/utils.o"
+  }
+]
