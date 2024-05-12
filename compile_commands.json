@@ -2,14 +2,12 @@
   {
     "arguments": [
       "/usr/bin/x86_64-linux-gnu-g++-10",
-      "-c",
       "-g",
       "-Wall",
       "-std=c++17",
       "-I",
       ".",
-      "-o",
-      "decoder/Decoder.o",
+      "-c",
       "decoder/Decoder.cpp"
     ],
     "directory": "/home/groot/bit-torrent",
@@ -19,19 +17,47 @@
   {
     "arguments": [
       "/usr/bin/x86_64-linux-gnu-g++-10",
-      "-c",
       "-g",
       "-Wall",
       "-std=c++17",
       "-I",
       ".",
-      "-o",
-      "decoder/Decoder.o",
+      "-c",
       "decoder/BEncodeToken.cpp"
     ],
     "directory": "/home/groot/bit-torrent",
     "file": "/home/groot/bit-torrent/decoder/BEncodeToken.cpp",
     "output": "/home/groot/bit-torrent/decoder/BEncodeToken.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/x86_64-linux-gnu-g++-10",
+      "-g",
+      "-Wall",
+      "-std=c++17",
+      "-I",
+      ".",
+      "-c",
+      "utils/utils.cpp"
+    ],
+    "directory": "/home/groot/bit-torrent",
+    "file": "/home/groot/bit-torrent/utils/utils.cpp",
+    "output": "/home/groot/bit-torrent/utils/utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/x86_64-linux-gnu-g++-10",
+      "-g",
+      "-Wall",
+      "-std=c++17",
+      "-I",
+      ".",
+      "-c",
+      "torrent_parser/torrent_parser.cpp"
+    ],
+    "directory": "/home/groot/bit-torrent",
+    "file": "/home/groot/bit-torrent/torrent_parser/torrent_parser.cpp",
+    "output": "/home/groot/bit-torrent/torrent_parser/torrent_parser.o"
   },
   {
     "arguments": [
@@ -43,11 +69,15 @@
       "-I",
       ".",
       "-o",
-      "decoder/Decoder.o",
-      "utils/utils.cpp"
+      "dist/client.out",
+      "client/client.cpp",
+      "torrent_parser.o",
+      "Decoder.o",
+      "BEncodeToken.o",
+      "utils.o"
     ],
     "directory": "/home/groot/bit-torrent",
-    "file": "/home/groot/bit-torrent/utils/utils.cpp",
-    "output": "/home/groot/bit-torrent/utils/utils.o"
+    "file": "/home/groot/bit-torrent/client/client.cpp",
+    "output": "/home/groot/bit-torrent/client/client.o"
   }
 ]
