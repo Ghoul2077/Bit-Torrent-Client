@@ -83,7 +83,7 @@ class Bdecode {
 
     void print();
     vector<BEncodeToken> getVectorizedFormat();
-    unordered_map<string, BEncodeToken> getDictionaryFormat();
+    dict_t getDictionaryFormat();
     bEncodeReturnTypes getElementAtIndex(const int& index, BEncodeToken& token);
     bigInt size() { return tokenCount; }
 };
