@@ -2,7 +2,8 @@
 using namespace std;
 
 bool insertDirectoryToStruct(Directory* rootDir, vector<string>& pathToInsert,
-                             bigInt const& fileLength, bigUInt index = 0) {
+                             bigInt const& fileLength, bigInt const& fileIndex,
+                             bigUInt index = 0) {
     if ((rootDir == NULL) || (pathToInsert.size() == 0) ||
         (pathToInsert.size() <= index)) {
         return true;
@@ -12,6 +13,7 @@ bool insertDirectoryToStruct(Directory* rootDir, vector<string>& pathToInsert,
         TorrentFileInfo fileInfo;
         fileInfo.name = pathToInsert[index];
         fileInfo.length = fileLength;
+        fileInfo.fileIndex = fileIndex;
         rootDir->files.insert(fileInfo);
         return true;
     }
@@ -38,7 +40,7 @@ bool insertDirectoryToStruct(Directory* rootDir, vector<string>& pathToInsert,
         nextDir = newDir;
     }
 
-    return insertDirectoryToStruct(nextDir, pathToInsert, fileLength,
+    return insertDirectoryToStruct(nextDir, pathToInsert, fileLength, fileIndex,
                                    index + 1);
 }
 
@@ -173,6 +175,7 @@ TorrentParser* TorrentParser::parseFile(
                 FILL_DATA_INT(fileInfo.pieceLength, infoStruct, "piece length");
                 FILL_DATA_STR(fileInfo.name, infoStruct, "name");
                 FILL_DATA_INT(fileInfo.length, infoStruct, "length");
+                fileInfo.fileIndex = 0;
                 rootDir->files.insert(fileInfo);
 
                 torrentInfo->rootDir = rootDir;
@@ -185,6 +188,7 @@ TorrentParser* TorrentParser::parseFile(
 
                 FILL_DATA_STR(rootDir->directoryName, infoStruct, "name");
                 list_t const* files = get<list_t*>(infoStruct->at("files").val);
+                bigInt fileIndexCounter = 0;
 
                 for (auto i : *files) {
                     dict_t const* subFile = get<dict_t*>(i.val);
@@ -196,6 +200,7 @@ TorrentParser* TorrentParser::parseFile(
                         TorrentFileInfo fileInfo;
                         fileInfo.name = path->at(0).toString();
                         fileInfo.length = length;
+                        fileInfo.fileIndex = fileIndexCounter;
                         rootDir->files.insert(fileInfo);
                     } else {
                         vector<string> pathAsVector;
@@ -207,8 +212,11 @@ TorrentParser* TorrentParser::parseFile(
                         if (path->at(0).getDatatype() == B_STRING) {
                             pathAsVector.push_back(path->at(0).toString());
                         }
-                        insertDirectoryToStruct(rootDir, pathAsVector, length);
+                        insertDirectoryToStruct(rootDir, pathAsVector, length,
+                                                fileIndexCounter);
                     }
+
+                    fileIndexCounter++;
                 }
 
                 torrentInfo->rootDir = rootDir;

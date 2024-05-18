@@ -32,6 +32,7 @@ struct TorrentFileInfo {
     string name;
     bigInt length;
     bigInt pieceLength;
+    bigInt fileIndex;
     string pieces;
 
     TorrentFileInfo() {
@@ -39,6 +40,7 @@ struct TorrentFileInfo {
         length = 0;
         pieceLength = 0;
         pieces = "";
+        fileIndex = 0;
     }
 };
 
@@ -50,7 +52,7 @@ struct DirectoryComparator {
 struct FileComparator {
     bool operator()(const TorrentFileInfo& file1,
                     const TorrentFileInfo& file2) const {
-        return (file1.name > file2.name);
+        return (file1.name < file2.name);
     }
 };
 
@@ -72,12 +74,12 @@ inline bool DirectoryComparator::operator()(const Directory* dir1,
         return 0;
     }
     if (dir1 != NULL && dir2 == NULL) {
-        return 1;
-    }
-    if (dir1 == NULL && dir2 != NULL) {
         return -1;
     }
-    return (dir1->directoryName > dir2->directoryName);
+    if (dir1 == NULL && dir2 != NULL) {
+        return 1;
+    }
+    return (dir1->directoryName < dir2->directoryName);
 }
 
 void prettyPrintDirectoryStruct(Directory* rootDir, int indentationLevel = 0);
