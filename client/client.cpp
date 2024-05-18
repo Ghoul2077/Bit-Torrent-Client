@@ -4,6 +4,11 @@
 using namespace std;
 
 int main(int argc, char const* argv[]) {
+    if (argc == 1) {
+        cout << "Error : Pass at least one torrent file name as argument"
+             << endl;
+    }
+
     for (int i = 1; i < argc; i++) {
         string input = "";
 

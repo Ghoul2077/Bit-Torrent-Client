@@ -12,14 +12,14 @@ bool insertDirectoryToStruct(Directory* rootDir, vector<string>& pathToInsert,
         TorrentFileInfo fileInfo;
         fileInfo.name = pathToInsert[index];
         fileInfo.length = fileLength;
-        rootDir->files.push_back(fileInfo);
+        rootDir->files.insert(fileInfo);
         return true;
     }
 
     Directory* nextDir = NULL;
 
     string currDir = pathToInsert[index];
-    set<Directory*>* subDirs = &(rootDir->subDir);
+    set<Directory*, DirectoryComparator>* subDirs = &(rootDir->subDir);
     bool dirAlreadyPresent = false;
     for (auto i : *subDirs) {
         if (i->directoryName == currDir) {
@@ -149,11 +149,11 @@ TorrentParser* TorrentParser::parseFile(
                           "announce");
             FILL_DATA_STR(torrentInfo->metaInfo.createdBy, torrentData,
                           "created by");
-            FILL_DATA_STR(torrentInfo->metaInfo.createdBy, torrentData,
+            FILL_DATA_STR(torrentInfo->metaInfo.creationDate, torrentData,
                           "creation date");
-            FILL_DATA_STR(torrentInfo->metaInfo.createdBy, torrentData,
+            FILL_DATA_STR(torrentInfo->metaInfo.encoding, torrentData,
                           "encoding");
-            FILL_DATA_STR(torrentInfo->metaInfo.createdBy, torrentData,
+            FILL_DATA_STR(torrentInfo->metaInfo.comment, torrentData,
                           "comment");
 
             BEncodeToken const* infoData = &torrentData->at("info");
@@ -173,7 +173,7 @@ TorrentParser* TorrentParser::parseFile(
                 FILL_DATA_INT(fileInfo.pieceLength, infoStruct, "piece length");
                 FILL_DATA_STR(fileInfo.name, infoStruct, "name");
                 FILL_DATA_INT(fileInfo.length, infoStruct, "length");
-                rootDir->files.push_back(fileInfo);
+                rootDir->files.insert(fileInfo);
 
                 torrentInfo->rootDir = rootDir;
             } else {
@@ -196,7 +196,7 @@ TorrentParser* TorrentParser::parseFile(
                         TorrentFileInfo fileInfo;
                         fileInfo.name = path->at(0).toString();
                         fileInfo.length = length;
-                        rootDir->files.push_back(fileInfo);
+                        rootDir->files.insert(fileInfo);
                     } else {
                         vector<string> pathAsVector;
                         for (bigUInt i = (path->size() - 1); i > 0; i--) {
